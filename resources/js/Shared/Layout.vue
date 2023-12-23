@@ -11,6 +11,15 @@
     </section>
     <section class="p-6">
         <div class="max-w-3xl mx-auto">
+            <iframe
+                class="mb-6" 
+                height="200px" 
+                width="100%" 
+                frameborder="no" 
+                scrolling="no" 
+                seamless 
+                src="https://player.simplecast.com/8503e054-0dd9-4689-96ec-4da2786e2425?dark=false"
+            ></iframe>
             <slot></slot>
         </div>
     </section>
