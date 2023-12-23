@@ -1,13 +1,46 @@
 <template>
-    <nav>
-        <ul>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/users">Users</Link></li>
-            <li><Link href="/settings">Settings</Link></li>
+    <nav class="ml-6">
+        <ul class="flex space-x-4 list-inside">
+            <li>
+                <NavLink 
+                    href="/" 
+                    :active="$page.component === 'Home'"
+                >
+                    Home
+                </NavLink>
+            </li>
+            <li>
+                <NavLink 
+                    href="/users" 
+                    :active="$page.component === 'Users'"
+                >
+                    Users
+                </NavLink>
+            </li>
+            <li>
+                <NavLink 
+                    href="/settings"
+                    class="text-blue-500 hover:underline"
+                    :active="$page.component === 'Settings'"
+                >
+                    Settings
+                </NavLink>
+            </li>
+            <li>
+                <NavLink 
+                    href="/logout" 
+                    :data="{ foo: 'bar' }" 
+                    method="post" 
+                    as="button"
+                    class="text-blue-500 hover:underline"
+                >
+                    Logout
+                </NavLink>
+            </li>
         </ul>
     </nav>
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import NavLink from '@/Shared/NavLink.vue';
 </script>
