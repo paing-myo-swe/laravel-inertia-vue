@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,16 +19,22 @@ Route::get('/', function () {
     return inertia('Home');
 });
 
-Route::get('/users', function () {
+Route::get('/users', function (Request $request) {
     return inertia('Users', [
-        'time' => now()->toTimeString()
+        'users' => User::query()
+            ->when($request->search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->paginate(10)
+            ->withQueryString()
+            ->through(fn($user) => [
+                'id' => $user->id,
+                'name' => $user->name
+            ]),
+        'filters' => $request->only(['search'])
     ]);
 });
 
 Route::get('/settings', function () {
     return inertia('Settings');
-});
-
-Route::post('/logout', function () {
-    dd(request()->all());
 });

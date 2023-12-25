@@ -26,17 +26,6 @@
                     Settings
                 </NavLink>
             </li>
-            <li>
-                <NavLink 
-                    href="/logout" 
-                    :data="{ foo: 'bar' }" 
-                    method="post" 
-                    as="button"
-                    class="text-blue-500 hover:underline"
-                >
-                    Logout
-                </NavLink>
-            </li>
         </ul>
     </nav>
 </template>
