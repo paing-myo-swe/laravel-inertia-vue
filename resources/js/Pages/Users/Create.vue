@@ -13,7 +13,7 @@
                         name="name" 
                         id="name" 
                         class="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    <div v-if="errors.name" v-text="$page.props.errors.name" class="text-red-500 text-sm mt-1"></div>
+                    <div v-if="form.errors.name" v-text="$page.props.errors.name" class="text-red-500 text-sm mt-1"></div>
                 </div>
             </div>
             <div class="mb-3">
@@ -25,7 +25,7 @@
                         name="email" 
                         id="email" 
                         class="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <div v-if="errors.email" v-text="$page.props.errors.email" class="text-red-500 text-sm mt-1"></div>
+                        <div v-if="form.errors.email" v-text="$page.props.errors.email" class="text-red-500 text-sm mt-1"></div>
                 </div>
             </div>
             <div class="mb-3">
@@ -37,32 +37,30 @@
                         name="password" 
                         id="password" 
                         class="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <div v-if="errors.password" v-text="$page.props.errors.password" class="text-red-500 text-sm mt-1"></div>
+                        <div v-if="form.errors.password" v-text="$page.props.errors.password" class="text-red-500 text-sm mt-1"></div>
                 </div>
             </div>
             <div>
-                <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                <button 
+                    type="submit" 
+                    :disabled="form.processing" 
+                    class="rounded-md px-4 py-2 bg-indigo-600 text-sm text-white shadow-sm hover:bg-indigo-500">Submit</button>
             </div>
         </form>
     </div>
 </template>
 
 <script setup>
-import { router } from '@inertiajs/vue3';
-import { reactive } from 'vue';
+import { useForm } from '@inertiajs/vue3';
 
-defineProps({
-    errors: Object
-});
-
-let form = reactive({
+let form = useForm({
     name: '',
     email: '',
     password: ''
 });
 
 let submit = () => {
-    router.post('/users', form);
+    form.post('/users');
 }
 
 </script>

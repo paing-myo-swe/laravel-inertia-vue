@@ -30,7 +30,8 @@
 <script setup>
 import Pagination from '@/Shared/Pagination.vue';
 import { ref, watch } from 'vue';
-import { router } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3';
+import debounce from 'lodash/debounce';
 
 let props = defineProps({
     users: Object,
@@ -39,11 +40,8 @@ let props = defineProps({
 
 let search = ref(props.filters.search);
 
-watch(search, value => {
-    router.get('/users', { 'search': value }, {
-        replace: true,
-        preserveState: true,
-    });
-});
+watch(search, debounce(function (value) {
+    router.get('/users', { 'search': value }, { replace: true, preserveState: true });
+}, 300));
 
 </script>
