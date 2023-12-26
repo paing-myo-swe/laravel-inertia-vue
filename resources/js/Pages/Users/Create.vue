@@ -13,7 +13,7 @@
                         name="name" 
                         id="name" 
                         class="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    <div v-if="form.errors.name" v-text="$page.props.errors.name" class="text-red-500 text-sm mt-1"></div>
+                    <div v-if="form.errors.name" v-text="form.errors.name" class="text-red-500 text-sm mt-1"></div>
                 </div>
             </div>
             <div class="mb-3">
@@ -25,7 +25,7 @@
                         name="email" 
                         id="email" 
                         class="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <div v-if="form.errors.email" v-text="$page.props.errors.email" class="text-red-500 text-sm mt-1"></div>
+                        <div v-if="form.errors.email" v-text="form.errors.email" class="text-red-500 text-sm mt-1"></div>
                 </div>
             </div>
             <div class="mb-3">
@@ -37,7 +37,7 @@
                         name="password" 
                         id="password" 
                         class="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <div v-if="form.errors.password" v-text="$page.props.errors.password" class="text-red-500 text-sm mt-1"></div>
+                        <div v-if="form.errors.password" v-text="form.errors.password" class="text-red-500 text-sm mt-1"></div>
                 </div>
             </div>
             <div>

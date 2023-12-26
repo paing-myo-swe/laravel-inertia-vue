@@ -20,10 +20,18 @@
             <li>
                 <NavLink 
                     href="/settings"
-                    class="text-blue-500 hover:underline"
                     :active="$page.component === 'Settings'"
                 >
                     Settings
+                </NavLink>
+            </li>
+            <li>
+                <NavLink 
+                    href="/logout"
+                    :active="$page.component === 'Logout'"
+                    method="post"
+                >
+                    Logout
                 </NavLink>
             </li>
         </ul>
