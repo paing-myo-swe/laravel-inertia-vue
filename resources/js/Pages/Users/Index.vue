@@ -5,7 +5,7 @@
             <h1 class="text-3xl font-bold">
                 Users
             </h1>
-            <Link href="/users/create" class="text-blue-500 ml-2 text-sm">New User</Link>
+            <Link :href="route('users.create')" class="text-blue-500 ml-2 text-sm">New User</Link>
         </div>
         <input type="text" placeholder="Search..." class="border px-3 rounded-lg" v-model="search"/>
     </div>
@@ -15,6 +15,9 @@
                 <div class="flex min-w-0 gap-x-4">
                     <div class="min-w-0 flex-auto">
                         <p class="text-sm font-semibold leading-6 text-gray-900">{{ user.name }}</p>
+                    </div>
+                    <div class="min-w-0 flex-auto">
+                        <p class="text-sm font-semibold leading-6 text-gray-500">{{ user.email }}</p>
                     </div>
                 </div>
                 <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">

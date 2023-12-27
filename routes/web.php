@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,53 +18,26 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/login', [ LoginController::class, 'create'])->name('login');
-Route::post('/login', [ LoginController::class, 'store']);
+Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::post('/login', [LoginController::class, 'store']);
 
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', function () {
-        return inertia('Home');
+    Route::get('/', [HomeController::class, 'home'])->name('home');
+
+    Route::prefix('users')->controller(UserController::class)->group(function () {
+        Route::get('/', 'index')->name('users.index');
+        Route::get('/create', 'create')->name('users.create');
+        Route::post('/', 'store')->name('users.store');
+        Route::get('/{user}/edit', 'edit')->name('users.edit');
+        Route::patch('/{user}', 'update')->name('users.update');
     });
-
-    Route::get('/users', function (Request $request) {
-        return inertia('Users/Index', [
-            'users' => User::query()
-                ->when($request->search, function ($query, $search) {
-                    $query->where('name', 'like', "%{$search}%");
-                })
-                ->orderBy('id', 'desc')
-                ->paginate(10)
-                ->withQueryString()
-                ->through(fn($user) => [
-                    'id' => $user->id,
-                    'name' => $user->name
-                ]),
-            'filters' => $request->only(['search'])
-        ]);
-    })->name('users.index');
-
-    Route::get('/users/create', function () {
-        return inertia('Users/Create');
-    })->name('users.create');
-
-    Route::post('/users', function (Request $request) {
-        $data = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        User::create($data);
-
-        return redirect()->route('users.index');
-    })->name('users.store');
+    
 
     Route::get('/settings', function () {
         return inertia('Settings');
     });
 
-    Route::post('/logout', [ LoginController::class, 'destroy']);
-
+    Route::post('/logout', [LoginController::class, 'destroy']);
 });

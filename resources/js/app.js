@@ -3,6 +3,7 @@ import "../css/app.css";
 import { createApp, h } from 'vue'
 import { createInertiaApp, router, Head, Link } from '@inertiajs/vue3'
 import NProgress from 'nprogress'
+import { ZiggyVue } from 'ziggy-js'
 
 import Layout from '@/Shared/Layout.vue';
 
@@ -16,8 +17,9 @@ createInertiaApp({
     return page
   },
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+    return createApp({ render: () => h(App, props) })
       .use(plugin)
+      .use(ZiggyVue)
       .component("Link", Link)
       .component("Head", Head)
       .mount(el)
